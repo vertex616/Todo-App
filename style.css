@@ -5,6 +5,29 @@
     --accent-color: #67c2c3;
     --text-color: #ebf2f2;
 }
+/* Light mode overrides */
+body.light-mode {
+    --primary-color: #f5f5f5;
+    --secondary-color: #b2dfdb;
+    --background-color: #ffffff;
+    --accent-color: #357475;
+    --text-color: #222222;
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 *{
     margin:0;
     padding: 0;
@@ -22,6 +45,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: background-color 0.4s, color 0.4s;
 }
 h1{
     margin-top: 100px;
