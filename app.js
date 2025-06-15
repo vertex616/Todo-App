@@ -77,15 +77,49 @@ function createToDoItem(todo, todoIndex) {
     checkbox.addEventListener('change', ()=>{
       allTodos[todoIndex].completed = checkbox.checked;
       saveTodos();
+
+      // Only vibrate when unchecked
+      if (!checkbox.checked) {
+          todoLI.classList.add('vibrate');
+          todoLI.addEventListener('animationend', () => {
+              todoLI.classList.remove('vibrate');
+          }, { once: true });
+      }
     })
     checkbox.checked = todo.completed;
     return todoLI;
 
 }
 function deleteTodoItem(todoIndex) {
-    allTodos = allTodos.filter((_, i)=> i !== todoIndex);
-    saveTodos();
-    updateToDoList();
+    const todoListUL = document.getElementById('todo-list');
+    const todoItems = todoListUL.querySelectorAll('.todo');
+    const todoToDelete = todoItems[todoIndex];
+    const nextTodo = todoItems[todoIndex + 1];
+
+    // Add glass-break animation to the todo to be deleted
+    todoToDelete.classList.add('glass-break');
+
+    // If there is a next todo, animate it pulling up
+    if (nextTodo) {
+        nextTodo.style.transition = 'transform 0.4s cubic-bezier(.36,1.01,.32,1)';
+        nextTodo.style.transform = 'translateY(-60px)';
+    }
+
+    // After animation, remove the todo and reset next todo's style
+    todoToDelete.addEventListener('animationend', () => {
+        // Remove from data
+        allTodos.splice(todoIndex, 1);
+        saveTodos();
+
+        // Remove from DOM
+        updateToDoList();
+
+        // Reset next todo's style (if any)
+        if (nextTodo) {
+            nextTodo.style.transition = '';
+            nextTodo.style.transform = '';
+        }
+    }, { once: true });
 }
 function saveTodos(){
     const todosJSON = JSON.stringify(allTodos);

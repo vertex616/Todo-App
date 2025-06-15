@@ -114,6 +114,49 @@ form{
     flex-grow: 1;
     transition: 200ms ease;
 }
+
+@keyframes vibrate {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-3px); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+.todo.vibrate {
+  animation: vibrate 0.25s linear;
+}
+
+@keyframes glass-break {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1) rotate(0deg) skew(0deg, 0deg);
+  }
+  60% {
+    opacity: 0.7;
+    filter: blur(1px);
+    transform: scale(1.05) rotate(2deg) skew(2deg, 2deg);
+  }
+  80% {
+    opacity: 0.5;
+    filter: blur(2px);
+    transform: scale(0.95) rotate(-8deg) skew(-4deg, -4deg);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(0.7) rotate(-15deg) skew(-8deg, -8deg) translateY(-40px);
+  }
+}
+
+.todo.glass-break {
+  animation: glass-break 0.5s cubic-bezier(.36,1.01,.32,1) forwards;
+  z-index: 2;
+  position: relative;
+}
+
 .delete-button{
     padding: 3px;
     background: none;
