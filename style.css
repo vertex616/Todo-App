@@ -7,11 +7,11 @@
 }
 /* Light mode overrides */
 body.light-mode {
-    --primary-color: #f5f5f5;
-    --secondary-color: #b2dfdb;
+    --primary-color: #225c5c;
+    --secondary-color: #357475;
     --background-color: #ffffff;
     --accent-color: #357475;
-    --text-color: #222222;
+    --text-color: #225c5c;         
 }
 
 #theme-toggle {
